@@ -1,0 +1,104 @@
+Dataset preparation:
+    - Downloaded PR2 18S Dataset
+    - Data was cleaned and filtered
+    - Some fields were created based on original data
+    - The fields on the resulting file are: 
+        - domain            (Filtered)
+        - supergroup        (Filtered)
+        - division          (Filtered)
+        - subdivision       (Filtered)
+        - class             (Filtered)
+        - order             (Filtered)
+        - family            (Filtered)
+        - genus             (Filtered)
+        - species           (Filtered)
+        - truncated_sequence(Created)
+        - start             
+        - end               
+        - label             
+        - gene
+        - reference_sequence
+        - taxo_id           
+        - seq_id            
+        - ambiguities       (Filtered)
+        - gb_taxonomy       (Filtered)
+        - silva_taxonomy    (Filtered)
+
+Sequences vectorial representation:
+    - The sequences follow the IUPAC notation
+    - The encode was defined to be: 
+        base_map = {
+            "A":[1.0, 0.0, 0.0, 0.0],
+            "T":[0.0, 1.0, 0.0, 0.0],
+            "G":[0.0, 0.0, 1.0, 0.0],
+            "C":[0.0, 0.0, 0.0, 1.0],
+
+            'W':[0.5, 0.5, 0.0, 0.0],
+            'S':[0.0, 0.0, 0.5, 0.5],
+            'M':[0.5, 0.0, 0.0, 0.5],
+            'K':[0.0, 0.5, 0.5, 0.0],
+            'R':[0.5, 0.0, 0.5, 0.0],
+            'Y':[0.0, 0.5, 0.0, 0.5],
+            
+            'B':[0.0, 0.3, 0.3, 0.3],
+            'D':[0.3, 0.3, 0.3, 0.0],
+            'H':[0.3, 0.3, 0.0, 0.3],
+            'V':[0.3, 0.0, 0.3, 0.3],
+
+            'N':[0.25, 0.25, 0.25, 0.25],
+        }
+
+Distance and Similarity tests:
+    - The dataset was splited in 9:1 rate for train and test
+    - At Class level:
+        - Train dataset size: 136768
+        - Test dataset size: 15197
+        - Error rate: 0.1259459103770481 (12.59%)
+    - At Genus level:
+        - Train dataset size: 107523
+        - Test dataset size: 11948
+        - Error rate: 0.4661031134917978 (46.61%)
+
+PR2 Feature-Clissifiers:
+    - The dataset was splited in 9:1 rate for train and test
+    - The validation only considerated the predicted fields with not null values
+    - Incomplete predictions still could be valid
+    - Results with default configurations:
+        - Total of predictions: 15669
+        - Correct predictions: 11957
+        - Overall error rate (15.669): 23.69%
+        - Error rate: 23.69%
+    - Results selecting only predictions with Confidence >= 0.9:
+        - Total of predictions: 12667
+        - Correct predictions: 10535
+        - Overall error rate (15.669): 32.76%
+        - Error rate: 16.83
+    - Results selecting only predictions with Confidence >= 0.8:
+        - Total of predictions: 14239
+        - Correct predictions: 11338
+        - Overall error rate (15.669): 27.64%
+        - Error rate: 20.37%
+
+Testes com Transformers:
+    - Arquitetura encode-only
+    - Positional Encoding baseado no modelo base (Attention is all you need)
+    - Embedding manual teve melhor resultados quem usar um modelo de embeddings
+    - Os modelos pareceram não aprender (resultados entre epocas bem semelhantes)
+    - Foi testado em diferentes níveis taxonômicos
+    - Também foi testado em nível de Ordem, isolando apenas uma classe (Ascomycota)
+    - 
+
+Testes com CNNs:
+    - Foram removidas sequencias com classificações conflitantes no nível (quando a mesma sequencia -duplicata- é classificada em duas categorias)
+    - Foi usado Circular Padding quando necessário
+    - 
+
+
+
+
+Problemas:
+    - Garantir representatividade das amostras (nos batches)
+    - * Convergência nos máximos globais (aumentar o tamanho dos batches ao decorrer das épocas?)
+    - Learning Rate dinâmico
+    - * Sequencias identicas classificadas em mais de um grupo
+    - 
