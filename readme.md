@@ -1,61 +1,131 @@
-## ./
-    - data_generator.ipynb : Notebook to generate train and test datasets and export the respective files (csv, taxonomy.txt, and fasta)
-    - notes.md : Notes about the experiments
+# A deep learning model for the classification of living organisms using the 18S rRNA segment of the genetic sequence
 
-## ./CNN
-    CNN models and tests
-    - ./results
-        - ./epochs : Log of the tests epochs
-        - ./summarized : Results of the test executions
-    - batch_run.ipynb : Notebook for CNN models train and tests
+A Master's thesis project developing and evaluating a deep learning (CNN) approach for taxonomic classification of genetic sequences, with comparative analysis against QIIME2's feature-classifier plugin.
 
-## ./data
-    Sequences Dataset(s)
-    - cleaned_sequences.csv : Pre-filtered PR2 sequences dataset
+## 📖 Overview
 
-## ./feature_classifier
-    QIIME2 feature classifier plugin data and tests
-    - analysis.ipynb : Notebook to check the accuracy of feature-classifier tests
-    - qiime_script.sh : Script to execute train and test with the feature-classifier
+This repository contains the implementation and some experiments for a deep learning model, CNN based, designed to classify taxonomic information from 18S rRNA genetic sequences. The project compares the performance of the custom deep learning approach against the established QIIME2 feature-classifier plugin using data from the PR2 platform.
 
-## Current Results:
+## ✍️ Author
 
-| id | level | batch_size | epochs | model | learning_rate | best_epoch | train_acc_best_epoch | test_acc_best_epoch |
-|----|-------|------------|--------|-------|--------------|------------|----------------------|---------------------|
-| 8 | class | dynamic | 150 | SimplestCNNClassifier_2layers_Residual | 0.001 | 141.0 | 0.997202 | 0.950846 |
-| 9 | class | dynamic | 150 | SimplestCNNClassifier_2layers_Residual | 0.001 | 148.0 | 0.998659 | 0.950279 |
-| 3 | class | dynamic | 150 | SimplestCNNClassifier_2layers_Residual | 0.001 | 134.0 | 0.998910 | 0.949632 |
-| 2 | class | dynamic | 150 | SimplestCNNClassifier_2layers_Residual | 0.001 | 129.0 | 0.997113 | 0.946473 |
-| 6 | class | dynamic | 150 | SimplestCNNClassifier_2layers | 0.001 | 119.0 | 0.999199 | 0.945421 |
-| 0 | class | dynamic | 150 | SimplestCNNClassifier_2layers | 0.001 | 109.0 | 0.999307 | 0.944935 |
-| 7 | class | dynamic | 150 | SimplestCNNClassifier_2layers | 0.001 | 99.0 | 0.999100 | 0.944773 |
-| 1 | class | dynamic | 150 | SimplestCNNClassifier_2layers | 0.001 | 101.0 | 0.999468 | 0.943882 |
-| 0 | class | dynamic | 300 | SimplestCNNClassifier0 | 0.001 | 210.0 | 0.999962 | 0.943153 |
-| 10 | class | dynamic | 150 | SimplestCNNClassifier_2layers_concat | 0.001 | 104.0 | 0.999118 | 0.942424 |
-| 4 | class | dynamic | 150 | SimplestCNNClassifier_2layers_concat | 0.001 | 100.0 | 0.999326 | 0.942182 |
-| 11 | class | dynamic | 150 | SimplestCNNClassifier_2layers_concat | 0.001 | 96.0 | 0.999136 | 0.941777 |
-| 4 | class | dynamic | 300 | SimplestCNNClassifier5 | 0.001 | 291.0 | 0.999929 | 0.940643 |
-| 5 | class | dynamic | 150 | SimplestCNNClassifier_2layers_concat | 0.001 | 87.0 | 0.998570 | 0.940562 |
-| 2 | class | dynamic | 300 | SimplestCNNClassifier1 | 0.001 | 198.0 | 0.999942 | 0.939752 |
-| 3 | class | dynamic | 300 | SimplestCNNClassifier1 | 0.001 | 189.0 | 0.999981 | 0.935946 |
-| 1 | class | dynamic | 300 | SimplestCNNClassifier0 | 0.001 | 112.0 | 0.999788 | 0.929306 |
-| 4 | class | dynamic | 300 | SimplestCNNClassifier0_1layerPooling | 0.001 | 258.0 | 0.999910 | 0.909142 |
-| 12 | class | dynamic | 300 | SimplestCNNClassifier0_1layerPooling | 0.001 | 140.0 | 0.999847 | 0.908090 |
-| 7 | class | dynamic | 300 | SimplestCNNClassifier0_1layer64cPooling | 0.001 | 146.0 | 0.999942 | 0.907604 |
-| 1 | class | 10000 | 200 | SimplestCNNClassifier0_1layerPooling | 0.001 | 172.0 | 0.999820 | 0.902583 |
-| 5 | class | dynamic | 300 | SimplestCNNClassifier5 | 0.001 | 248.0 | 0.999929 | 0.899911 |
-| 4 | class | 10000 | 200 | SimplestCNNClassifier0_1layer64cPooling | 0.001 | 175.0 | 0.999730 | 0.894809 |
-| 7 | class | 10000 | 200 | SimplestCNNClassifier5_1layerPooling | 0.001 | 195.0 | 0.999838 | 0.887440 |
-| 1 | class | dynamic | 300 | SimplestCNNClassifier0_1layerk4 | 0.001 | 240.0 | 0.999910 | 0.875941 |
-| 5 | class | dynamic | 300 | SimplestCNNClassifier0_1layerGELU | 0.001 | 279.0 | 0.999910 | 0.871407 |
-| 11 | class | dynamic | 300 | SimplestCNNClassifier0_1layer | 0.001 | 276.0 | 0.999892 | 0.869625 |
-| 3 | class | dynamic | 300 | SimplestCNNClassifier0_1layer | 0.001 | 284.0 | 0.999904 | 0.868410 |
-| 0 | class | dynamic | 300 | SimplestCNNClassifier0_1layer16 | 0.001 | 237.0 | 0.999897 | 0.867844 |
-| 6 | class | dynamic | 300 | SimplestCNNClassifier0_1layer64c | 0.001 | 298.0 | 0.999929 | 0.867196 |
-| 8 | class | dynamic | 300 | SimplestCNNClassifier0_1layer16 | 0.001 | 262.0 | 0.999874 | 0.867034 |
-| 9 | class | dynamic | 300 | SimplestCNNClassifier0_1layerk4 | 0.001 | 263.0 | 0.999874 | 0.865495 |
-| 10 | class | dynamic | 300 | SimplestCNNClassifier0_1layerk2 | 0.001 | 274.0 | 0.999892 | 0.862661 |
-| 2 | class | dynamic | 300 | SimplestCNNClassifier0_1layerk2 | 0.001 | 263.0 | 0.999904 | 0.857964 |
-| 5 | class | 10000 | 200 | SimplestCNNClassifier5_1layer | 0.001 | 114.0 | 0.999892 | 0.856345 |
-| 0 | class | 10000 | 200 | SimplestCNNClassifier0_1layer | 0.001 | 153.0 | 0.999811 | 0.846708 |
-| 3 | class | 10000 | 200 | SimplestCNNClassifier0_1layer64c | 0.001 | 169.0 | 0.999748 | 0.846627 |
+- **Name**: Gustavo Savi Frainer
+- **LinkedIn**: [gsfrainer](https://www.linkedin.com/in/gsfrainer/)
+
+## ✅ Results Summary
+
+The developed model consistently outperformed the reference tool in terms of accuracy across all classification levels, based on the dataset used. The table below presents the mean accuracies, while a more detailed comparison (including minimum, mean, and maximum values) can be found in the associated thesis document at the end of this page.
+
+* Experiments Mean Acurracies Comparison:
+
+|                   |                   | Mean Accuracy |               |
+|-------------------|-------------------|---------------|---------------|
+|**Taxonomy Level** | **Sampling**      | **Reference** | **CNN**       |
+|Class              | Simple random     | 94.67%        | 99.00%        |
+|Class              | Stratified        | 94.77%        | 99.05%        |
+|Order              | Simple random     | 94.92%        | 98.52%        |
+|Order              | Stratified        | 94.81%        | 98.54%        |
+|Family             | Simple random     | 94.19%        | 97.56%        |
+|Family             | Stratified        | 94.23%        | 97.58%        |
+|Genus              | Simple random     | 82.35%        | 88.80%        |
+|Genus              | Stratified        | 82.55%        | 89.52%        |
+|Species            | Simple random     | 35.63%        | 90.88%        |
+|Species            | Stratified        | 30.37%        | 91.71%        |
+
+
+
+## 📦 Dataset
+
+- **Source**: [PR2 (Protist Ribosomal Reference) Database](https://pr2-database.org/)
+- **Sequence Type**: 18S rRNA sequences
+- **Purpose**: Taxonomic classification training and evaluation
+
+## 🔬 Baseline Comparison
+- **Tool**: [QIIME2 feature-classifier plugin](https://docs.qiime2.org/2024.10/tutorials/feature-classifier/)
+- **Purpose**: Generate reference classification results for performance comparison
+
+
+## 📁 Project Structure
+
+### Data (`./data/`)
+
+- `cleaned_sequences.csv`: The complete dataset of genetic sequences used across all experiments.
+- `data_generator.ipynb`: Script for generating train and test sets for experiments.
+
+
+### Reference Experiments (`./feature-classifier/`)
+
+- `qiime_script.sh`: Bash script to execute classification using the QIIME2 feature-classifier plugin.
+- `analysis.ipynb`: Reports classification results (correct, incorrect classifications, accuracy).
+- `times.ipynb`: Provides time metrics for the reference experiments.
+
+
+### CNN Tests (`./CNN/`)
+
+- `analysis.ipynb`: Script to generate summaries and insights from CNN results.
+- `batch_run.ipynb`: Complete CNN experiment pipeline including model definition, training, and evaluation.
+- `times.ipynb`: Script for analyzing execution times.
+- `Models/`: Folder with some of the pre-treined models
+- `results/`: Folder that contains the logs of the experiments executions
+
+
+## 📚 Dependencies
+
+* Python >= 3.10
+* QIIME2 >= 2024.10.1 (for reference experiments only)
+* PyTorch >= 2.4.0
+* Pandas, Numpy, Scikit-learn
+* Jupyter Notebook
+
+
+## 🚀 How to Run
+
+### Setup
+```bash
+## Clone the repository
+git clone https://github.com/GSFrainer/taxonomy_classification.git
+cd taxonomy_classification
+
+## Install dependencies
+pip install -r requirements.txt
+```
+
+> **Note:** 
+> For QIIME2 setup, follow the official instructions:
+> [https://docs.qiime2.org/2024.10/install/](https://docs.qiime2.org/2024.10/install/)
+
+### Generate Train/Test Datasets:
+   ```bash
+   # Open and run the cells in:
+   data/data_generator.ipynb
+   ```
+
+### Run Reference Experiments (QIIME2):
+   ```bash
+   cd feature-classifier
+   bash qiime_script.sh
+   ```
+
+### Run CNN Experiments:
+
+   ```bash
+   # Open and run:
+   CNN/batch_run.ipynb
+   ```
+
+
+## 🎓 Thesis Information
+
+- **Title**: Um modelo de deep learning para classificação de organismos vivos utilizando o segmento 18S rRNA da sequência genética
+- **Author**: Gustavo Savi Frainer
+- **Institution**: Pontifícia Universidade Católica do Rio Grande do Sul (PPGCC/PUCRS)
+- **Year**: 2025
+- **Supervisor**: Dr. Duncan Dubugras Alcoba Ruiz
+- **Link**: ....
+
+
+## 💡 Notes
+
+> * The results and methods are part of an completed research project.
+> * If you use this work, please cite appropriately or contact the author.
+
+
