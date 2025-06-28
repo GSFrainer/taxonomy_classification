@@ -119,8 +119,8 @@ pip install -r requirements.txt
 - **Author**: Gustavo Savi Frainer
 - **Institution**: Pontifícia Universidade Católica do Rio Grande do Sul (PPGCC/PUCRS)
 - **Year**: 2025
-- **Supervisor**: Dr. Duncan Dubugras Alcoba Ruiz
-- **Link**: ....
+- **Advisor**: Dr. Duncan Dubugras Alcoba Ruiz
+- **Link**: [PUCRS - Digital Library of Theses and Dissertations](https://tede2.pucrs.br/tede2/handle/tede/11711)
 
 
 ## 💡 Notes
